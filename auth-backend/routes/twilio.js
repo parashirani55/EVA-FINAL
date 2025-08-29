@@ -65,8 +65,8 @@ router.post("/voice", async (req, res) => {
       .replace(/{company}/g, companyName);
 
     twiml.pause({ length: 1 });
-    twiml.say({ voice: "alice" }, personalizedScript);
-    twiml.say({ voice: "alice" }, "What topic would you like to discuss today?");
+    twiml.say({ voice: "woman" }, personalizedScript);
+    twiml.say({ voice: "woman" }, "What topic would you like to discuss today?");
     twiml.pause({ length: 1 });
 
     // Gather user speech
@@ -84,7 +84,7 @@ router.post("/voice", async (req, res) => {
     );
   } catch (err) {
     console.error("Voice Route Error:", err.message, err.stack);
-    twiml.say({ voice: "alice" }, "Sorry, there was an error starting the call. Please try again.");
+    twiml.say({ voice: "woman" }, "Sorry, there was an error starting the call. Please try again.");
     twiml.hangup();
   }
 
@@ -145,7 +145,7 @@ router.post("/response", async (req, res) => {
 
     if (shouldHangup) {
       aiResponse = "Okay, thank you for your time. Have a great day!";
-      twiml.say({ voice: "alice" }, aiResponse);
+      twiml.say({ voice: "woman" }, aiResponse);
       twiml.hangup();
     } else if (SpeechResult) {
       // OpenAI generates reply
@@ -174,7 +174,7 @@ router.post("/response", async (req, res) => {
         timeout: 5,
         speechTimeout: "auto",
       });
-      gather.say({ voice: "alice" }, aiResponse);
+      gather.say({ voice: "woman" }, aiResponse);
 
       // Safety redirect
       twiml.redirect(
@@ -183,7 +183,7 @@ router.post("/response", async (req, res) => {
     }
   } catch (err) {
     console.error("Response Route Error:", err.message, err.stack);
-    twiml.say({ voice: "alice" }, "Sorry, there was an error processing your response. Please try again.");
+    twiml.say({ voice: "woman" }, "Sorry, there was an error processing your response. Please try again.");
     twiml.hangup();
   }
 
