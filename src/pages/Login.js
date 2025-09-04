@@ -10,7 +10,7 @@ function Login() {
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
+  const API_BASE_URL = process.env.REACT_APP_API_URL;
   const features = [
     {
       icon: Phone,
@@ -68,11 +68,11 @@ function Login() {
     setLoading(true);
 
     try {
-      const res = await fetch('http://localhost:5000/api/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-      });
+      const res = await fetch(`${API_BASE_URL}/api/login`, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ email, password })
+});
 
       const data = await res.json();
 
